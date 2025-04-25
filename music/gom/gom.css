@@ -145,3 +145,13 @@ body {
         opacity: 0;
     }
 }
+
+.tilt-box {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    transition: transform 0.1s linear;
+    transform-style: preserve-3d;
+}

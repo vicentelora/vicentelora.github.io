@@ -71,6 +71,14 @@ function getAccel(){
                     const alpha = event.alpha;
                     const beta = event.beta;
                     const gamma = event.gamma;
+
+                    const box = document.getElementById('tilt-box');
+                    if (box) {
+                        const betaClamped = Math.max(-90, Math.min(90, beta));
+                        const gammaClamped = Math.max(-90, Math.min(90, gamma));
+                        box.style.transform = `rotateX(${betaClamped}deg) rotateY(${gammaClamped}deg)`;
+                    }
+
                     console.log(`Orientation: alpha=${alpha}, beta=${beta}, gamma=${gamma}`);
                     if (ws.readyState === WebSocket.OPEN) {
                         ws.send(JSON.stringify({ alpha, beta, gamma }));
