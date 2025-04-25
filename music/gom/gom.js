@@ -30,11 +30,12 @@ document.querySelectorAll('.menu button').forEach(button => {
         // Hide the menu and show the tap screen
         document.getElementById('menu').style.display = 'none';
         if (selectedNote === 'acc') {
-            getAccel();
             document.getElementById('acc-screen').style.display = 'flex';
+            getAccel();
         }
         else {
-        document.getElementById('tap-screen').style.display = 'flex';
+            document.getElementById('tap-screen').style.display = 'flex';
+            getTaps();
         }
     });
 });
@@ -80,17 +81,19 @@ function getAccel(){
 }
 
 // Send the selected note when the user clicks anywhere
-document.body.addEventListener('click', (event) => {
-    if (selectedNote && ws.readyState === WebSocket.OPEN) {
-        ws.send(selectedNote);
-        console.log("Message sent:", selectedNote);
-        clickAnimation(event);
-    } else if (!selectedNote) {
-        console.warn("No note selected yet.");
-    } else {
-        console.warn("WebSocket not connected.");
-    }
-});
+function getTaps() {
+    document.body.addEventListener('click', (event) => {
+        if (selectedNote && ws.readyState === WebSocket.OPEN) {
+            ws.send(selectedNote);
+            console.log("Message sent:", selectedNote);
+            clickAnimation(event);
+        } else if (!selectedNote) {
+            console.warn("No note selected yet.");
+        } else {
+            console.warn("WebSocket not connected.");
+        }
+    });
+}
 
 // Animations
 
