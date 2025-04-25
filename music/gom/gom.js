@@ -9,6 +9,8 @@ ws.onmessage = (event) => {
     console.log("Message received from server:", event.data);
 };
 
+// Configuration
+
 let selectedNote = null;
 
 // Reset to initial menu on page load
@@ -29,6 +31,27 @@ document.querySelectorAll('.menu button').forEach(button => {
         document.getElementById('tap-screen').style.display = 'flex';
     });
 });
+
+// Handle Interactions
+
+function getAccel(){
+    DeviceMotionEvent.requestPermission().then(response => {
+        if (response == 'granted') {
+            window.addEventListener('devicemotion', (event) => {
+                const x = event.acceleration.x;
+                const y = event.acceleration.y;
+                const z = event.acceleration.z;
+                console.log(`Acceleration: x=${x}, y=${y}, z=${z}`);
+                if (ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ x, y, z }));
+                    console.log("Message sent:", { x, y, z });
+                } else {
+                    console.warn("WebSocket not connected.");
+                }
+            });
+        }
+    });
+}
 
 // Send the selected note when the user clicks anywhere
 document.body.addEventListener('click', (event) => {

@@ -61,6 +61,10 @@ body {
     background-color: #1ABC9C; /* Teal */
 }
 
+.button-acc {
+    background-color: #bc1a1a;
+}
+
 .menu button:hover {
     background-color: #555;
     transform: scale(1.05);
@@ -76,10 +80,6 @@ body {
     .menu button {
         flex: 1 1 calc(50% - 20px); /* 2 per row */
         max-width: 100%;
-    }
-
-    .menu button:nth-child(7) {
-        flex: 1 1 100%; /* last button full width */
     }
 }
   
