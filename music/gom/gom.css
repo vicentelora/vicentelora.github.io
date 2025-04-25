@@ -11,8 +11,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    align-items: flex-start;
+    align-items: center; /* changed from flex-start */
     height: 100vh;
     background-color: #000;
     padding: 10px;
@@ -67,17 +66,20 @@ body {
     transform: scale(1.05);
 }
 
-/* Adjust layout for smaller screens */
+/* Mobile responsive layout: 2 per row, last one full width */
 @media (max-width: 600px) {
-    .menu button {
-        flex: 1 1 calc(50% - 20px); /* Fit 2 buttons per row */
-        max-width: 100%; /* Allow buttons to stretch fully */
+    .menu {
+        align-content: center;
+        padding: 20px 10px;
     }
-}
 
-@media (max-width: 400px) {
     .menu button {
-        flex: 1 1 100%; /* Stack buttons vertically */
+        flex: 1 1 calc(50% - 20px); /* 2 per row */
+        max-width: 100%;
+    }
+
+    .menu button:nth-child(7) {
+        flex: 1 1 100%; /* last button full width */
     }
 }
   
