@@ -54,9 +54,10 @@ function getAccel(){
                     const intensity = Math.min(Math.sqrt(x*x + y*y + z*z), 30); // Clamp at 30
 
                     // Map intensity to brightness between 0 (black) and 100% (white)
-                    const brightness = Math.min(100, Math.floor((intensity / 30) * 100));
+
+                    const brightness = Math.floor((intensity / 30) * 100);
                     document.getElementById('dynamic-style').textContent =
-                        `body { background-color: hsl(0, 0%, ${brightness}%); }`;
+                        `body { background-color: hsl(0, 100%, ${brightness / 2}%); }`;
 
                     if (ws.readyState === WebSocket.OPEN) {
                         ws.send(JSON.stringify({ x, y, z }));
