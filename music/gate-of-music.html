@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tap to Say Hi</title>
+  <title>Gate of Music | Lora</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./gom/gom.css">
 </head>
 <body style="text-align:center;font-size:2em;padding-top:50px;">
-  <p>Tap anywhere to say hi 👋</p>
+  <div class="menu" id="menu">
+    <button data-note="A">A</button>
+    <button data-note="B">B</button>
+    <button data-note="C">C</button>
+    <button data-note="D">D</button>
+    <button data-note="E">E</button>
+    <button data-note="F">F</button>
+    <button data-note="G">G</button>
+  </div>
+  <div class="tap-screen" id="tap-screen">
+    <p class="tap-text">Tap anywhere</p>
+  </div>
   <script src="./gom/gom.js"></script>
 </body>
 </html>
