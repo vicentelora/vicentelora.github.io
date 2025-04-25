@@ -1,4 +1,4 @@
-// Connection
+// ---------------------- Connection ---------------------- //
 
 const ws = new WebSocket("wss://gate-of-music.onrender.com");
 
@@ -9,7 +9,7 @@ ws.onmessage = (event) => {
     console.log("Message received from server:", event.data);
 };
 
-// Configuration
+// ---------------------- Configuration ---------------------- //
 
 let selectedNote = null;
 
@@ -40,19 +40,24 @@ document.querySelectorAll('.menu button').forEach(button => {
     });
 });
 
-// Handle Interactions
+// ---------------------- Handle Interactions ---------------------- //
 
 function getAccel(){
-    // Check if the device supports DeviceMotionEvent and request permission
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
         console.log("DeviceMotionEvent is supported. Requesting permission...");
         DeviceMotionEvent.requestPermission().then(response => {
             if (response == 'granted') {
                 window.addEventListener('devicemotion', (event) => {
-                    const x = event.acceleration.x;
-                    const y = event.acceleration.y;
-                    const z = event.acceleration.z;
-                    console.log(`Acceleration: x=${x}, y=${y}, z=${z}`);
+                    const x = event.acceleration.x || 0;
+                    const y = event.acceleration.y || 0;
+                    const z = event.acceleration.z || 0;
+                    const intensity = Math.min(Math.sqrt(x*x + y*y + z*z), 30); // Clamp at 30
+
+                    // Map intensity to brightness between 0 (black) and 100% (white)
+                    const brightness = Math.min(100, Math.floor((intensity / 30) * 100));
+                    document.getElementById('dynamic-style').textContent =
+                        `body { background-color: hsl(0, 0%, ${brightness}%); }`;
+
                     if (ws.readyState === WebSocket.OPEN) {
                         ws.send(JSON.stringify({ x, y, z }));
                         console.log("Message sent:", { x, y, z });
@@ -60,6 +65,7 @@ function getAccel(){
                         console.warn("WebSocket not connected.");
                     }
                 });
+
                 window.addEventListener('deviceorientation',(event) => {
                     const alpha = event.alpha;
                     const beta = event.beta;
@@ -95,7 +101,7 @@ function getTaps() {
     });
 }
 
-// Animations
+// ---------------------- Animations ---------------------- //
 
 function pickRandomColor() {
     const colors = ['#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#8E44AD'];
