@@ -97,11 +97,15 @@ function getAccel(){
 
 // Send the selected note when the user clicks anywhere
 function getTaps() {
+    let firstClick = true;
+
     document.body.addEventListener('click', (event) => {
-        if (selectedNote && ws.readyState === WebSocket.OPEN) {
+        if (selectedNote && ws.readyState === WebSocket.OPEN && !firstClick) {
             ws.send(selectedNote);
             console.log("Message sent:", selectedNote);
             clickAnimation(event);
+        } else if (firstClick) {
+            firstClick = false;
         } else if (!selectedNote) {
             console.warn("No note selected yet.");
         } else {
