@@ -76,7 +76,7 @@ function getAccel(){
                     if (box) {
                         const betaClamped = Math.max(-90, Math.min(90, beta));
                         const gammaClamped = Math.max(-90, Math.min(90, gamma));
-                        box.style.transform = `rotateX(${betaClamped}deg) rotateY(${gammaClamped}deg)`;
+                        box.style.transform = `translate(-50%, -50%) rotateX(${betaClamped}deg) rotateY(${gammaClamped}deg)`;
                     }
 
                     console.log(`Orientation: alpha=${alpha}, beta=${beta}, gamma=${gamma}`);
