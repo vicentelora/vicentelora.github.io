@@ -15,8 +15,9 @@ let selectedNote = null;
 
 // Reset to initial menu on page load
 window.addEventListener('load', () => {
-    document.getElementById('menu').style.display = 'flex';
     document.getElementById('tap-screen').style.display = 'none';
+    document.getElementById('acc-screen').style.display = 'none';
+    document.getElementById('menu').style.display = 'flex';
     selectedNote = null;
 });
 
@@ -24,33 +25,58 @@ window.addEventListener('load', () => {
 document.querySelectorAll('.menu button').forEach(button => {
     button.addEventListener('click', () => {
         selectedNote = button.getAttribute('data-note');
-        console.log("Selected note:", selectedNote);
+        console.log("Selected:", selectedNote);
 
         // Hide the menu and show the tap screen
         document.getElementById('menu').style.display = 'none';
+        if (selectedNote === 'acc') {
+            getAccel();
+            document.getElementById('acc-screen').style.display = 'flex';
+        }
+        else {
         document.getElementById('tap-screen').style.display = 'flex';
+        }
     });
 });
 
 // Handle Interactions
 
 function getAccel(){
-    DeviceMotionEvent.requestPermission().then(response => {
-        if (response == 'granted') {
-            window.addEventListener('devicemotion', (event) => {
-                const x = event.acceleration.x;
-                const y = event.acceleration.y;
-                const z = event.acceleration.z;
-                console.log(`Acceleration: x=${x}, y=${y}, z=${z}`);
-                if (ws.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify({ x, y, z }));
-                    console.log("Message sent:", { x, y, z });
-                } else {
-                    console.warn("WebSocket not connected.");
-                }
-            });
-        }
-    });
+    // Check if the device supports DeviceMotionEvent and request permission
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        console.log("DeviceMotionEvent is supported. Requesting permission...");
+        DeviceMotionEvent.requestPermission().then(response => {
+            if (response == 'granted') {
+                window.addEventListener('devicemotion', (event) => {
+                    const x = event.acceleration.x;
+                    const y = event.acceleration.y;
+                    const z = event.acceleration.z;
+                    console.log(`Acceleration: x=${x}, y=${y}, z=${z}`);
+                    if (ws.readyState === WebSocket.OPEN) {
+                        ws.send(JSON.stringify({ x, y, z }));
+                        console.log("Message sent:", { x, y, z });
+                    } else {
+                        console.warn("WebSocket not connected.");
+                    }
+                });
+                window.addEventListener('deviceorientation',(event) => {
+                    const alpha = event.alpha;
+                    const beta = event.beta;
+                    const gamma = event.gamma;
+                    console.log(`Orientation: alpha=${alpha}, beta=${beta}, gamma=${gamma}`);
+                    if (ws.readyState === WebSocket.OPEN) {
+                        ws.send(JSON.stringify({ alpha, beta, gamma }));
+                        console.log("Message sent:", { alpha, beta, gamma });
+                    } else {
+                        console.warn("WebSocket not connected.");
+                    }
+                });
+            }
+        });
+    } else {
+        console.log("DeviceMotionEvent is not supported.");
+        location.reload();
+    }
 }
 
 // Send the selected note when the user clicks anywhere

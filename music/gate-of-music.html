@@ -15,10 +15,13 @@
     <button class="button-e" data-note="E">E</button>
     <button class="button-f" data-note="F">F</button>
     <button class="button-g" data-note="G">G</button>
-    <button class="button-acc" id="accelPermsButton" onclick="getAccel()">Acc</button>
+    <button class="button-acc" id="accelPermsButton" data-note="acc">Acc</button>
   </div>
-  <div class="tap-screen" id="tap-screen">
+  <div class="tap-screen" id="tap-screen" style="display: none;">
     <p class="tap-text">Tap anywhere</p>
+  </div>
+  <div class="acc-screen" id="acc-screen" style="display: none;">
+    <p class="acc-text">Move phone</p>
   </div>
   <script src="./gom/gom.js"></script>
 </body>
