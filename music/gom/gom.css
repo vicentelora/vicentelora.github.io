@@ -104,22 +104,22 @@ body {
 }
 
 .acc-screen {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-size: 1.5em;
     color: #fff;
+    width: 100%;
+    height: 100%;
 }
 
 .acc-text {
+    position: relative;
     color: #ffffff;
+    z-index: 2;
     user-select: none;
 }
 
@@ -147,6 +147,11 @@ body {
 }
 
 .tilt-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg);
+    z-index: 1;
     width: 100px;
     height: 100px;
     background-color: red;
