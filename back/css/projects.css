@@ -1,0 +1,24 @@
+.projects-page {
+    padding: 2rem;
+    text-align: center;
+}
+
+.projects-page h1 {
+    font-size: 2rem;
+    margin-top: 4rem;
+    margin-bottom: 5rem;
+}
+
+.projects-page p {
+    font-size: 1.4rem;
+}
+
+.projects-page a {
+    font-size: 1.4rem;
+    color: #ffffff;
+}
+
+a:hover {
+    transform: scale(1.05);
+    color: #09ff00;
+}
