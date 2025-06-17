@@ -11,11 +11,11 @@ export class Orientation3D {
             const beta = event.beta;
             const gamma = event.gamma;
 
-            const box = document.getElementById('tilt-box');
+            const box = document.getElementById('tilt-cube');
             if (box) {
                 const betaClamped = Math.max(-90, Math.min(90, beta));
                 const gammaClamped = Math.max(-90, Math.min(90, gamma));
-                box.style.transform = `translate(-50%, -50%) rotateX(${betaClamped}deg) rotateY(${gammaClamped}deg)`;
+                box.style.transform = `rotateX(${betaClamped}deg) rotateY(${gammaClamped}deg)`;
             }
 
             if (ws.readyState === WebSocket.OPEN) {

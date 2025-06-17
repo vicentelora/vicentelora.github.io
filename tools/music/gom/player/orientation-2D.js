@@ -15,7 +15,7 @@ export class Orientation2D {
             if (box) {
                 const betaClamped = Math.max(-90, Math.min(90, beta));
                 const gammaClamped = Math.max(-90, Math.min(90, gamma));
-                box.style.transform = `translate(-50%, -50%) rotateX(${betaClamped}deg) rotateY(${gammaClamped}deg)`;
+                box.style.transform = `rotateX(${betaClamped}deg) rotateY(${gammaClamped}deg)`;
             }
 
             if (ws.readyState === WebSocket.OPEN) {

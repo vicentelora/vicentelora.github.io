@@ -7,10 +7,10 @@ export class Tapping {
         this.holdIntervalMs = 50;
         this.handleDown = null;
         this.handleUp = null;
+        this.currentBgColor = '#000000';
     }
 
     getTaps(ws, playerID) {
-        // Debounced handlers
         this.handleDown = (event) => {
             if (this.holdInterval) return; // Prevent multiple intervals
             // Send "A" (action on)
@@ -18,6 +18,10 @@ export class Tapping {
                 ws.send(JSON.stringify({ playerID, type: 'A' }));
                 this.clickAnimation(event);
             }
+            // Change background to a random color
+            this.currentBgColor = this.pickRandomSoftColor();
+            document.body.style.backgroundColor = this.currentBgColor;
+
             // Start sending "H" (hold) repeatedly
             this.holdInterval = setInterval(() => {
                 if (playerID && ws.readyState === WebSocket.OPEN) {
@@ -35,6 +39,8 @@ export class Tapping {
             if (playerID && ws.readyState === WebSocket.OPEN) {
                 ws.send(JSON.stringify({ playerID, type: 'L' }));
             }
+            // Reset background to black
+            document.body.style.backgroundColor = '#000000';
         };
 
         document.body.addEventListener('mousedown', this.handleDown);
@@ -57,6 +63,20 @@ export class Tapping {
 
     pickRandomColor() {
         const colors = ['#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#8E44AD'];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    pickRandomSoftColor() {
+        const colors = [
+            '#8D7B68', // muted brown
+            '#5D6D7E', // muted blue-gray
+            '#4B4453', // dark purple-gray
+            '#3E5C59', // dark teal
+            '#5C5470', // muted violet
+            '#3C3C3C', // dark gray
+            '#2D3A3A', // deep green-gray
+            '#4E4E50'  // dark slate
+        ];
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
