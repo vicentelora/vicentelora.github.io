@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gate of Music | Lora</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./gom-player.css?v=0.1">
+  <style id="dynamic-style"></style>
+  <script type="module" src="./gom-player.js"></script>
+</head>
+<body style="text-align:center;font-size:2em;">
+  <div class="menu" id="menu">
+    <button class="button-a" data-playerID="A">A</button>
+    <button class="button-b" data-playerID="B">B</button>
+    <button class="button-c" data-playerID="C">C</button>
+    <button class="button-d" data-playerID="D">D</button>
+    <button class="button-e" data-playerID="E">E</button>
+    <button class="button-f" data-playerID="F">F</button>
+    <button class="button-g" data-playerID="G">G</button>
+    <button class="button-h" data-playerID="H">H</button>
+  </div>
+  <div class="mode-screen" id="tapping-screen" style="display: none;">
+    <p class="mode-text">Toca no Ecra</p>
+  </div>
+  <div class="mode-screen" id="motion-screen" style="display: none;">
+    <p class="mode-text">Abana o telemóvel</p>
+  </div>
+  <div class="orientation-screen" id="orientation-2D-screen" style="display: none;">
+    <p class="orientation-text">Roda o telemóvel</p>
+    <div class="tilt-box" id="tilt-box"></div>
+  </div>
+  <div class="orientation-screen" id="orientation-3D-screen" style="display: none;">
+    <p class="orientation-text">Roda o telemóvel</p>
+    <div id="tilt-cube"></div>
+  </div>
+</body>
+</html>

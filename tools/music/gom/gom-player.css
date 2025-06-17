@@ -61,8 +61,8 @@ body {
     background-color: #1ABC9C; /* Teal */
 }
 
-.button-acc {
-    background-color: #bc1a1a;
+.button-h {
+    background-color: #bc1a1a; /* Dark Red */
 }
 
 .menu button:hover {
@@ -83,7 +83,7 @@ body {
     }
 }
   
-.tap-screen {
+.mode-screen {
     display: none;
     position: absolute;
     top: 0;
@@ -98,12 +98,12 @@ body {
     color: #fff;
 }
 
-.tap-text {
+.mode-text {
     color: #ffffff;
     user-select: none;
 }
 
-.acc-screen {
+.orientation-screen {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -116,7 +116,7 @@ body {
     height: 100%;
 }
 
-.acc-text {
+.orientation-text {
     position: relative;
     color: #ffffff;
     z-index: 2;
@@ -147,9 +147,9 @@ body {
 }
 
 .tilt-box {
-    position: absolute;
     top: 50%;
     left: 50%;
+    margin: 100px auto;
     transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg);
     z-index: 1;
     width: 100px;
@@ -159,4 +159,14 @@ body {
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
     transition: transform 0.1s linear;
     transform-style: preserve-3d;
+}
+
+#tilt-cube {
+  width: 100px; height: 100px;
+  margin: 100px auto;
+  background: #183eff;
+  border: 2px solid #151baf;
+  box-shadow: 0 0 20px rgba(255, 2, 217, 0.5);
+  transform-style: preserve-3d;
+  transition: transform 0.1s linear;
 }
