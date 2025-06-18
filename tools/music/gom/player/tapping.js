@@ -8,21 +8,23 @@ export class Tapping {
         this.handleDown = null;
         this.handleUp = null;
         this.currentBgColor = '#000000';
+        this.touchActive = false; // Add this flag
     }
 
     getTaps(ws, playerID) {
         this.handleDown = (event) => {
+            // Prevent double firing on touch devices
+            if (event.type === 'mousedown' && this.touchActive) return;
+            if (event.type === 'touchstart') this.touchActive = true;
+
             if (this.holdInterval) return; // Prevent multiple intervals
-            // Send "A" (action on)
             if (playerID && ws.readyState === WebSocket.OPEN) {
                 ws.send(JSON.stringify({ playerID, type: 'A' }));
                 this.clickAnimation(event);
             }
-            // Change background to a random color
             this.currentBgColor = this.pickRandomSoftColor();
             document.body.style.backgroundColor = this.currentBgColor;
 
-            // Start sending "H" (hold) repeatedly
             this.holdInterval = setInterval(() => {
                 if (playerID && ws.readyState === WebSocket.OPEN) {
                     ws.send(JSON.stringify({ playerID, type: 'H' }));
@@ -31,15 +33,15 @@ export class Tapping {
         };
 
         this.handleUp = (event) => {
+            if (event.type === 'touchend') this.touchActive = false;
+
             if (this.holdInterval) {
                 clearInterval(this.holdInterval);
                 this.holdInterval = null;
             }
-            // Send "L" (let go)
             if (playerID && ws.readyState === WebSocket.OPEN) {
                 ws.send(JSON.stringify({ playerID, type: 'L' }));
             }
-            // Reset background to black
             document.body.style.backgroundColor = '#000000';
         };
 
