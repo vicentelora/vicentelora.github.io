@@ -87,13 +87,19 @@ window.addEventListener('load', () => {
 document.querySelectorAll('.menu button').forEach(button => {
     button.addEventListener('click', async () => {
         playerID = button.getAttribute('data-playerID');
+        console.log("Player ID:", playerID);
+
+        // Send player ID to the server
         ws.send(JSON.stringify({ playerID: playerID , action: 'join' }));
+        console.log("Message sent to server:", { playerID: playerID });
+
+        // Get the player mode based on player ID
         playerMode = await getPlayerMode(ws, playerID);
 
-        // Hide menu and show mode screen immediately
+        // Hide the menu and show the tap screen immediately
         document.getElementById('menu').style.display = 'none';
 
-        // For orientation modes, request permission here, synchronously
+         // For orientation modes, request permission here, synchronously
         if (playerMode === 'orientation-2D' || playerMode === 'orientation-3D') {
             if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
                 // iOS: must be called directly in response to user gesture
@@ -110,15 +116,26 @@ document.querySelectorAll('.menu button').forEach(button => {
             }
         }
 
-        // Now show the correct screen and start the handler
-        if (playerMode === 'orientation-2D') {
+        if (playerMode === 'tapping') {
+            document.getElementById('tapping-screen').style.display = 'flex';
+            const tapping = new Tapping();
+            tapping.getTaps(ws, playerID);
+
+        } else if (playerMode === 'motion') {
+            document.getElementById('motion-screen').style.display = 'flex';
+            const motion = new Motion();
+            motion.getMotion(ws, playerID);
+
+        } else if (playerMode === 'orientation-2D') {
             document.getElementById('orientation-2D-screen').style.display = 'flex';
             const orientation2D = new Orientation2D();
             orientation2D.getOrientation2D(ws, playerID);
+
         } else if (playerMode === 'orientation-3D') {
             document.getElementById('orientation-3D-screen').style.display = 'flex';
             const orientation3D = new Orientation3D();
             orientation3D.getOrientation3D(ws, playerID);
+
         } else {
             console.warn("Unknown player mode:", playerMode);
         }
