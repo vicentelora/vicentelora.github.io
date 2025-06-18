@@ -10,9 +10,34 @@ const ws = new WebSocket("wss://gate-of-music.onrender.com");
 ws.onopen = () => {
     console.log("WebSocket connection established");
 };
-ws.onmessage = (event) => {
-    console.log("Message received from server:", event.data);
+
+// Global WebSocket
+ws.onmessage = async (event) => {
+    let dataStr;
+    if (event.data instanceof Blob) {
+        dataStr = await event.data.text();
+    } else {
+        dataStr = event.data;
+    }
+    console.log("Message received from server:", dataStr);
+    const data = JSON.parse(dataStr);
+    if (pendingPlayerModeResolve) {
+        pendingPlayerModeResolve(data);
+    }
 };
+
+let pendingPlayerModeResolve = null;
+
+function getPlayerMode(ws, playerID) {
+    return new Promise((resolve) => {
+        pendingPlayerModeResolve = (data) => {
+            if (data.playerID === playerID && data.mode) {
+                resolve(data.mode);
+                pendingPlayerModeResolve = null;
+            }
+        };
+    });
+}
 
 // ---------------------- Configuration ---------------------- //
 
@@ -32,30 +57,19 @@ window.addEventListener('load', () => {
 
 // Handle player Mode
 document.querySelectorAll('.menu button').forEach(button => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
         playerID = button.getAttribute('data-playerID');
         console.log("Player ID:", playerID);
 
         // Send player ID to the server
-        ws.send(JSON.stringify({ playerID: playerID }));
+        ws.send(JSON.stringify({ playerID: playerID , action: 'join' }));
         console.log("Message sent to server:", { playerID: playerID });
 
         // Get the player mode based on player ID
-        //getPlayerMode();
+        playerMode = await getPlayerMode(ws, playerID);
 
         // Hide the menu and show the tap screen
         document.getElementById('menu').style.display = 'none';
-    
-        if (playerID === 'A') {
-            playerMode = 'motion'; // Set to motion mode for player 1
-        }
-        else if (playerID === 'B') {
-            playerMode = 'orientation-2D'; // Set to orientation 2D mode for player 2
-        } else if (playerID === 'C') {
-            playerMode = 'orientation-3D'; // Set to orientation 3D mode for player 3
-        } else {
-            playerMode = 'tapping'; // Default to tapping mode for now
-        }
 
         if (playerMode === 'tapping') {
             document.getElementById('tapping-screen').style.display = 'flex';
@@ -82,16 +96,3 @@ document.querySelectorAll('.menu button').forEach(button => {
         }
     });
 });
-
-function getPlayerMode() {
-    // Wait for the server to send the player mode based on player ID
-    ws.onmessage = (event) => {
-        console.log("Waiting for player mode from server...");
-        const data = JSON.parse(event.data);
-        console.log("Data received from server:", data);
-        if (data.playerID === playerID) {
-            playerMode = data.mode;
-            console.log("Player Mode:", playerMode);
-        }
-    };
-}
