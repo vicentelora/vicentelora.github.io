@@ -13,6 +13,33 @@ body, * {
     -ms-user-select: none;     /* IE10+/Edge */
 }
 
+#player-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 100;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 1.1em;
+    padding: 8px 0 4px 0;
+    text-align: center;
+    pointer-events: none;
+    letter-spacing: 0.03em;
+}
+
+#player-header .player-name {
+    font-weight: bold;
+    margin-right: 12px;
+    font-size: 1.1em;
+}
+
+#player-header .instrument {
+    font-style: italic;
+    color: #b0e0e6;
+    font-size: 1em;
+}
+
 .menu {
     display: flex;
     flex-wrap: wrap;

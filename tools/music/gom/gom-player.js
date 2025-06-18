@@ -39,6 +39,35 @@ function getPlayerMode(ws, playerID) {
     });
 }
 
+function getProjectInfo() {
+    return new Promise((resolve, reject) => {
+        const wsProject = new WebSocket("wss://gate-of-music.onrender.com");
+        wsProject.onopen = () => {
+            wsProject.send(JSON.stringify({ action: "getProject" }));
+        };
+        wsProject.onmessage = async (event) => {
+            let dataStr;
+            if (event.data instanceof Blob) {
+                dataStr = await event.data.text();
+            } else {
+                dataStr = event.data;
+            }
+            try {
+                const data = JSON.parse(dataStr);
+                if (data.action === "projectInfo" && data.project && data.project.players) {
+                    resolve(data.project.players);
+                } else {
+                    reject("Invalid project data");
+                }
+            } catch (e) {
+                reject(e);
+            }
+            wsProject.close();
+        };
+        wsProject.onerror = reject;
+    });
+}
+
 // ---------------------- Configuration ---------------------- //
 
 let playerID = null;
@@ -55,7 +84,6 @@ window.addEventListener('load', () => {
     playerMode = null;
 });
 
-// Handle player Mode
 document.querySelectorAll('.menu button').forEach(button => {
     button.addEventListener('click', async () => {
         playerID = button.getAttribute('data-playerID');
@@ -68,7 +96,7 @@ document.querySelectorAll('.menu button').forEach(button => {
         // Get the player mode based on player ID
         playerMode = await getPlayerMode(ws, playerID);
 
-        // Hide the menu and show the tap screen
+        // Hide the menu and show the tap screen immediately
         document.getElementById('menu').style.display = 'none';
 
         if (playerMode === 'tapping') {
@@ -94,5 +122,20 @@ document.querySelectorAll('.menu button').forEach(button => {
         } else {
             console.warn("Unknown player mode:", playerMode);
         }
+
+        // Fetch and update player info in the header (async, after UI transition)
+        getProjectInfo().then(playersObj => {
+            const playerInfo = playersObj[playerID];
+            if (playerInfo) {
+                document.querySelectorAll('.player-name').forEach(el => el.textContent = playerInfo.name || '');
+                document.querySelectorAll('.instrument').forEach(el => el.textContent = playerInfo.instrument || '');
+            } else {
+                document.querySelectorAll('.player-name').forEach(el => el.textContent = '');
+                document.querySelectorAll('.instrument').forEach(el => el.textContent = '');
+            }
+        }).catch(() => {
+            document.querySelectorAll('.player-name').forEach(el => el.textContent = '');
+            document.querySelectorAll('.instrument').forEach(el => el.textContent = '');
+        });
     });
 });

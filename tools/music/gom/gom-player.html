@@ -9,6 +9,10 @@
   <script type="module" src="./gom-player.js"></script>
 </head>
 <body style="text-align:center;font-size:2em;">
+  <div id="player-header">
+    <span class="player-name"></span>
+    <span class="instrument"></span>
+  </div>
   <div class="menu" id="menu">
     <button class="button-a" data-playerID="A">A</button>
     <button class="button-b" data-playerID="B">B</button>
@@ -20,8 +24,6 @@
     <button class="button-h" data-playerID="H">H</button>
   </div>
   <div class="mode-screen" id="tapping-screen" style="display: none;">
-    <div class="player-name"></div>
-    <div class="instrument"></div>
     <p class="mode-text">Toca no Ecra</p>
   </div>
   <div class="mode-screen" id="motion-screen" style="display: none;">
