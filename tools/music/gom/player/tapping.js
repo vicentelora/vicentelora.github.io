@@ -15,7 +15,10 @@ export class Tapping {
         this.handleDown = (event) => {
             // Prevent double firing on touch devices
             if (event.type === 'mousedown' && this.touchActive) return;
-            if (event.type === 'touchstart') this.touchActive = true;
+            if (event.type === 'touchstart') {
+                this.touchActive = true;
+                event.preventDefault(); // <-- Add this line
+            }
 
             if (this.holdInterval) return; // Prevent multiple intervals
             if (playerID && ws.readyState === WebSocket.OPEN) {
@@ -47,7 +50,7 @@ export class Tapping {
 
         document.body.addEventListener('mousedown', this.handleDown);
         document.body.addEventListener('mouseup', this.handleUp);
-        document.body.addEventListener('touchstart', this.handleDown);
+        document.body.addEventListener('touchstart', this.handleDown, { passive: false }); // <-- passive: false
         document.body.addEventListener('touchend', this.handleUp);
     }
 
