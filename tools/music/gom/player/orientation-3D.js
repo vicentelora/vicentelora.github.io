@@ -24,9 +24,9 @@ export class Orientation3D {
             }
         };
 
-        if (typeof DeviceMotionEvent !== "undefined" && typeof DeviceMotionEvent.requestPermission === "function") {
-            // iOS
-            DeviceMotionEvent.requestPermission().then(response => {
+        if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
+            // iOS 13+ requires permission for device orientation
+            DeviceOrientationEvent.requestPermission().then(response => {
                 if (response === 'granted') {
                     window.addEventListener('deviceorientation', this.orientationHandler);
                 } else {
