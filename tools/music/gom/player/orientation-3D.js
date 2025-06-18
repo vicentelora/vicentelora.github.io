@@ -24,22 +24,7 @@ export class Orientation3D {
             }
         };
 
-        if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
-            // iOS 13+ requires permission for device orientation
-            DeviceOrientationEvent.requestPermission().then(response => {
-                if (response === 'granted') {
-                    window.addEventListener('deviceorientation', this.orientationHandler);
-                } else {
-                    console.warn("DeviceOrientation permission denied.");
-                }
-            }).catch(console.error);
-        } else if (typeof DeviceOrientationEvent !== "undefined") {
-            // Android and others
-            window.addEventListener('deviceorientation', this.orientationHandler);
-        } else {
-            console.log("DeviceOrientationEvent is not supported.");
-            location.reload();
-        }
+        window.addEventListener('deviceorientation', this.orientationHandler);
     }
 
     cleanup() {
