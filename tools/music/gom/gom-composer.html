@@ -11,8 +11,13 @@
 <body>
   <div class="configs" id="configs"></div>
   <div id="players"></div>
-  <button id="add-player">Add Player</button>
-  <button id="send-project">Update Project</button>
+  <button id="add-player" class="add-btn">+ Add Player</button>
+  <div class="composer-actions">
+    <button id="download-project" class="composer-btn download-btn">⬇️ Download JSON</button>
+    <input type="file" id="upload-project" accept=".json" style="display:none;">
+    <label for="upload-project" id="upload-label" class="composer-btn upload-btn">⬆️ Upload JSON</label>
+  </div>
+  <button id="send-project" class="update-btn">Done! (Update Server)</button>
   <div id="send-feedback" style="margin-top:10px;min-height:1.5em;"></div>
   <pre id="project-json"></pre>
 </body>

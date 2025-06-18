@@ -76,7 +76,6 @@ body {
 }
 
 button#add-player, button#send-project {
-    background: #2aa9c2;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -88,7 +87,7 @@ button#add-player, button#send-project {
 }
 
 button#add-player:hover, button#send-project:hover {
-    background: #183eff;
+    background: #616161;
     transform: scale(1.05);
 }
 
@@ -106,6 +105,63 @@ button#add-player:hover, button#send-project:hover {
     width: 90vw;
 }
 
+.composer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.composer-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 22px;
+    font-size: 1em;
+    cursor: pointer;
+    color: #fff;
+    margin: 8px 4px 8px 4px;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    display: inline-block;
+    min-width: 140px;
+    text-align: center;
+}
+
+.add-btn {
+    background: #29cc47;
+}
+.add-btn:hover {
+    background: #1e9c34;
+    transform: scale(1.05);
+}
+
+.download-btn {
+    background: #2a46c2;
+}
+.download-btn:hover {
+    background: #183eff;
+    transform: scale(1.05);
+}
+
+.upload-btn {
+    background: #8E44AD;
+    cursor: pointer;
+    display: inline-block;
+}
+.upload-btn:hover {
+    background: #6c3483;
+    transform: scale(1.05);
+}
+
+.update-btn {
+    background: #e67e22;
+}
+.update-btn:hover {
+    background: #ca6f1e;
+    transform: scale(1.05);
+}
+
 @media (max-width: 600px) {
     #players > div {
         flex-direction: column;
@@ -120,5 +176,15 @@ button#add-player:hover, button#send-project:hover {
     button#add-player, button#send-project {
         width: 90vw;
         margin: 6px 0;
+    }
+    .composer-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .composer-btn {
+        width: 90vw;
+        min-width: unset;
+        margin: 4px 0;
     }
 }

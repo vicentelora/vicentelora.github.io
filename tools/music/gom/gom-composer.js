@@ -134,3 +134,44 @@ document.getElementById('send-project').onclick = () => {
 
 // Initial load
 loadProjectFromServer();
+
+// Download JSON
+document.getElementById('download-project').onclick = () => {
+    const json = JSON.stringify({
+        players: Object.fromEntries(players.map(p => [p.id, p]))
+    }, null, 2);
+    const blob = new Blob([json], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "gom-project.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+};
+
+// Upload JSON
+document.getElementById('upload-project').onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+        try {
+            const data = JSON.parse(evt.target.result);
+            if (data.players) {
+                players = Object.values(data.players);
+                renderPlayers();
+                document.getElementById('send-feedback').textContent = "Project loaded from file!";
+                document.getElementById('send-feedback').style.color = "#29cc47";
+            } else {
+                document.getElementById('send-feedback').textContent = "Invalid JSON: missing players.";
+                document.getElementById('send-feedback').style.color = "#b94429";
+            }
+        } catch (err) {
+            document.getElementById('send-feedback').textContent = "Invalid JSON file.";
+            document.getElementById('send-feedback').style.color = "#b94429";
+        }
+    };
+    reader.readAsText(file);
+};
