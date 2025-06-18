@@ -86,6 +86,20 @@ window.addEventListener('load', () => {
 
 document.querySelectorAll('.menu button').forEach(button => {
     button.addEventListener('click', async () => {
+
+        if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
+            try {
+                const response = await DeviceOrientationEvent.requestPermission();
+                if (response !== 'granted') {
+                    alert("Permission for device orientation denied.");
+                    return;
+                }
+            } catch (e) {
+                alert("Device orientation permission error.");
+                return;
+            }
+        }
+        
         playerID = button.getAttribute('data-playerID');
         console.log("Player ID:", playerID);
 
@@ -98,23 +112,6 @@ document.querySelectorAll('.menu button').forEach(button => {
 
         // Hide the menu and show the tap screen immediately
         document.getElementById('menu').style.display = 'none';
-
-         // For orientation modes, request permission here, synchronously
-        if (playerMode === 'orientation-2D' || playerMode === 'orientation-3D') {
-            if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
-                // iOS: must be called directly in response to user gesture
-                try {
-                    const response = await DeviceOrientationEvent.requestPermission();
-                    if (response !== 'granted') {
-                        alert("Permission for device orientation denied.");
-                        return;
-                    }
-                } catch (e) {
-                    alert("Device orientation permission error.");
-                    return;
-                }
-            }
-        }
 
         if (playerMode === 'tapping') {
             document.getElementById('tapping-screen').style.display = 'flex';
