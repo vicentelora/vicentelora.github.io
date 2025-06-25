@@ -10,6 +10,8 @@ export class Motion {
 
     getMotion(ws, playerID) {
         this.motionHandler = (event) => {
+            if (window.isMuted) return;
+
             const x = event.acceleration.x || 0;
             const y = event.acceleration.y || 0;
             const z = event.acceleration.z || 0;

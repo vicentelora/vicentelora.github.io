@@ -1,14 +1,31 @@
 import { Tapping } from './player/tapping.js';
 import { Motion } from './player/motion.js';
+import { Orientation1D } from './player/orientation-1D.js';
 import { Orientation2D } from './player/orientation-2D.js';
 import { Orientation3D } from './player/orientation-3D.js';
+import { Looping } from './player/looping.js';
+
+const server = "wss://gate-of-music-eu.onrender.com";
+let isMuted = false;
 
 // ---------------------- Connection ---------------------- //
 
-const ws = new WebSocket("wss://gate-of-music.onrender.com");
+const ws = new WebSocket(server);
 
 ws.onopen = () => {
     console.log("WebSocket connection established");
+};
+
+// Keep WebSocket alive with a heartbeat
+let wsHeartbeatInterval = setInterval(() => {
+    if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ playerID, action: "ping" }));
+    }
+}, 25000); // 25 seconds is a common interval
+
+ws.onclose = () => {
+    clearInterval(wsHeartbeatInterval);
+    console.log("WebSocket connection closed");
 };
 
 // Global WebSocket
@@ -23,6 +40,10 @@ ws.onmessage = async (event) => {
     const data = JSON.parse(dataStr);
     if (pendingPlayerModeResolve) {
         pendingPlayerModeResolve(data);
+    }
+    // Show/hide mute overlay if this player is muted/unmuted
+    if ((data.action === "mute" || data.action === "unmute") && data.playerID === playerID) {
+        setMutedOverlay(data.action === "mute");
     }
 };
 
@@ -41,7 +62,7 @@ function getPlayerMode(ws, playerID) {
 
 function getProjectInfo() {
     return new Promise((resolve, reject) => {
-        const wsProject = new WebSocket("wss://gate-of-music.onrender.com");
+        const wsProject = new WebSocket(server);
         wsProject.onopen = () => {
             wsProject.send(JSON.stringify({ action: "getProject" }));
         };
@@ -77,12 +98,22 @@ let playerMode = null;
 window.addEventListener('load', () => {
     document.getElementById('tapping-screen').style.display = 'none';
     document.getElementById('motion-screen').style.display = 'none';
+    document.getElementById('orientation-1D-screen').style.display = 'none';
     document.getElementById('orientation-2D-screen').style.display = 'none';
     document.getElementById('orientation-3D-screen').style.display = 'none';
+    document.getElementById('loop-screen').style.display = 'none';
     document.getElementById('menu').style.display = 'flex';
     playerID = null;
     playerMode = null;
 });
+
+window.isMuted = isMuted;
+function setMutedOverlay(visible) {
+    const overlay = document.getElementById('mute-overlay');
+    if (overlay) overlay.style.display = visible ? 'flex' : 'none';
+    isMuted = visible;
+    window.isMuted = isMuted;
+}
 
 document.querySelectorAll('.menu button').forEach(button => {
     button.addEventListener('click', async () => {
@@ -118,10 +149,20 @@ document.querySelectorAll('.menu button').forEach(button => {
             const tapping = new Tapping();
             tapping.getTaps(ws, playerID);
 
+        } else if (playerMode === 'looping') {
+            document.getElementById('loop-screen').style.display = 'flex';
+            const looping = new Looping();
+            looping.getTaps(ws, playerID);
+
         } else if (playerMode === 'motion') {
             document.getElementById('motion-screen').style.display = 'flex';
             const motion = new Motion();
             motion.getMotion(ws, playerID);
+        
+        } else if (playerMode === 'orientation-1D') {
+            document.getElementById('orientation-1D-screen').style.display = 'flex';
+            const orientation1D = new Orientation1D();
+            orientation1D.getOrientation1D(ws, playerID);
 
         } else if (playerMode === 'orientation-2D') {
             document.getElementById('orientation-2D-screen').style.display = 'flex';

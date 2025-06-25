@@ -205,3 +205,80 @@ body, * {
   transform-style: preserve-3d;
   transition: transform 0.1s linear;
 }
+
+#loop-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#loop-top {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+#loop-bottom {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgba(255, 0, 0, 0.05);
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.loop-text {
+    color: white;
+    font-size: 1em;
+    user-select: none;
+}
+
+/* Flash feedback */
+.tap-flash {
+    animation: flash 0.3s;
+}
+
+@keyframes flash {
+    from {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    to {
+        background-color: transparent;
+    }
+}
+
+/* Loop playing color state */
+#loop-top.active {
+    background-color: var(--active-color, rgba(255,255,255,0.1));
+}
+
+
+#orientation-arrow {
+    width: 60px;
+    height: 60px;
+    margin: 40px auto;
+    border: none;
+    background: none;
+    position: relative;
+}
+#orientation-arrow::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 50px solid #29cc47;
+}

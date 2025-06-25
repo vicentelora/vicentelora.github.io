@@ -26,16 +26,44 @@
   <div class="mode-screen" id="tapping-screen" style="display: none;">
     <p class="mode-text">Toca no Ecra</p>
   </div>
+    <div class="mode-screen" id="loop-screen" style="display: none;">
+    <div id="loop-top">
+        <p class="loop-text">Começar</p>
+    </div>
+    <div id="loop-bottom">
+        <p class="loop-text">Parar</p>
+    </div>
+  </div>
   <div class="mode-screen" id="motion-screen" style="display: none;">
     <p class="mode-text">Abana o telemóvel</p>
   </div>
+  <div class="orientation-screen" id="orientation-1D-screen" style="display: none;">
+    <p class="orientation-text">Roda o telemóvel 1D</p>
+    <div id="orientation-arrow"></div>
+  </div>
   <div class="orientation-screen" id="orientation-2D-screen" style="display: none;">
-    <p class="orientation-text">Roda o telemóvel</p>
+    <p class="orientation-text">Roda o telemóvel 2D</p>
     <div id="tilt-box" id="tilt-box"></div>
   </div>
   <div class="orientation-screen" id="orientation-3D-screen" style="display: none;">
-    <p class="orientation-text">Roda o telemóvel</p>
+    <p class="orientation-text">Roda o telemóvel 3D</p>
     <div id="tilt-cube"></div>
+  </div>
+  <div id="mute-overlay" style="
+    display:none;
+    position:fixed;
+    z-index:9999;
+    top:0; left:0; right:0; bottom:0;
+    background:rgba(80,80,80,0.95);
+    color:white;
+    font-size:3em;
+    font-weight:bold;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    pointer-events:auto;
+  ">
+    Silenciado
   </div>
 </body>
 </html>

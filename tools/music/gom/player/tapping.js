@@ -13,6 +13,7 @@ export class Tapping {
 
     getTaps(ws, playerID) {
         this.handleDown = (event) => {
+            if (window.isMuted) return;
             // Prevent double firing on touch devices
             if (event.type === 'mousedown' && this.touchActive) return;
             if (event.type === 'touchstart') {
@@ -23,12 +24,13 @@ export class Tapping {
             if (this.holdInterval) return; // Prevent multiple intervals
             if (playerID && ws.readyState === WebSocket.OPEN) {
                 ws.send(JSON.stringify({ playerID, type: 'A' }));
-                this.clickAnimation(event);
+                //this.clickAnimation(event);
             }
             this.currentBgColor = this.pickRandomSoftColor();
             document.body.style.backgroundColor = this.currentBgColor;
 
             this.holdInterval = setInterval(() => {
+                if (window.isMuted) return;
                 if (playerID && ws.readyState === WebSocket.OPEN) {
                     ws.send(JSON.stringify({ playerID, type: 'H' }));
                 }
@@ -36,6 +38,7 @@ export class Tapping {
         };
 
         this.handleUp = (event) => {
+            if (window.isMuted) return;
             if (event.type === 'touchend') this.touchActive = false;
 
             if (this.holdInterval) {

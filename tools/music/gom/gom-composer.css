@@ -87,7 +87,7 @@ button#add-player, button#send-project {
 }
 
 button#add-player:hover, button#send-project:hover {
-    background: #616161;
+    background: #353535;
     transform: scale(1.05);
 }
 
@@ -109,7 +109,6 @@ button#add-player:hover, button#send-project:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: center;
     margin-bottom: 10px;
 }
 
@@ -160,6 +159,156 @@ button#add-player:hover, button#send-project:hover {
 .update-btn:hover {
     background: #ca6f1e;
     transform: scale(1.05);
+}
+
+/* Toggle Switch */
+.mode-switch {
+    display: flex;
+    align-items: center;
+    background: #181818;
+    border-radius: 30px;
+    padding: 6px 10px;
+    gap: 8px;
+    margin: 16px 0;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.mode-switch span {
+    color: #aaa;
+    font-size: 0.95em;
+}
+
+.mode-switch .switch {
+    position: relative;
+    width: 60px;
+    height: 28px;
+    background: #444;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+}
+
+.mode-switch .switch::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    background: #29cc47;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.mode-switch.control .switch::before {
+    transform: translateX(32px);
+}
+
+.mode-switch.control .switch {
+    background: #cccccc;
+}
+
+/* Project Name input styling */
+.project-name-container {
+    background: #181818;
+    border-radius: 10px;
+    padding: 8px 16px;
+    margin: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.project-name-container label {
+    font-weight: bold;
+    margin-right: 8px;
+    font-size: 1em;
+}
+
+.project-name-container input {
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 1em;
+    outline: none;
+    transition: border 0.2s;
+    max-width: 200px;
+}
+
+.project-name-container input:focus {
+    border: 1.5px solid #29cc47;
+}
+
+.mute-btn {
+    background: #b94429;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.mute-btn:hover {
+    background: #e74c3c;
+}
+
+
+.solo-btn {
+    background: #e67e22;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background 0.2s;
+}
+
+.solo-btn:hover {
+    background: #ca6f1e;
+}
+
+#mute-toggle-all-btn {
+    background: #b92929;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+#mute-toggle-all-btn:hover {
+    background: #7c1e1e;
+}
+
+#unsolo-all-btn {
+    background: #055f49;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+#unsolo-all-btn:hover {
+    background: #063d12;
+}
+
+#stop-all-btn {
+    background: #570b0b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+#stop-all-btn:hover {
+    background: #270d0a;
 }
 
 @media (max-width: 600px) {

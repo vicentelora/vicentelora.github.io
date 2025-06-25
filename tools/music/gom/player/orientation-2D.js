@@ -7,6 +7,8 @@ export class Orientation2D {
 
     getOrientation2D(ws, playerID) {
         this.orientationHandler = (event) => {
+            if (window.isMuted) return;
+            
             const alpha = event.alpha;
             const beta = event.beta;
             const gamma = event.gamma;
