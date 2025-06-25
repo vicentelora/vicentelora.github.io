@@ -26,7 +26,7 @@ export class Looping {
             const y = event.clientY || (event.touches && event.touches[0].clientY);
             const screenHeight = window.innerHeight;
 
-            if (y < screenHeight * 0.75) {
+            if (y < screenHeight * 0.6) {
                 this.playLoop(ws, playerID);
                 this.flash(this.topElement);
             } else {
