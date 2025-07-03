@@ -2,7 +2,6 @@
   padding: 4rem 2rem;
   max-width: 900px;
   margin: 0 auto;
-  animation: fadeIn 1s ease;
 }
 
 .cv-page h1 {
@@ -44,13 +43,11 @@
 
 #education {
   padding: 2rem;
-  background-color: #003d1d;
   border-radius: 8px;
 }
 
 #experience {
   padding: 2rem;
-  background-color: #001b3d;
   border-radius: 8px;
   animation: fadeIn 0.8s ease;
 }
@@ -94,19 +91,16 @@
 
 #skills {
   padding: 2rem;
-  background-color: #3d3300;
   border-radius: 8px;
 }
 
 #languages {
   padding: 2rem;
-  background-color: #3d0033;
   border-radius: 8px;
 }
 
 #interests {
   padding: 2rem;
-  background-color: #3d0000;
   border-radius: 8px;
 }
 
@@ -126,24 +120,13 @@
 }
 
 #contact a {
-  color: #ffffff;
-  text-decoration: underline;
+  color: #00bfff;
+  text-decoration: none;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 #contact a:hover {
-  color: #09ff00;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  color: #0185b0;
 }
 
 @keyframes slideUp {

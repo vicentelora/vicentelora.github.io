@@ -8,6 +8,7 @@ body {
     align-items: center;
     gap: 2.5rem;
     padding-bottom: 4rem;
+    animation: fadeIn 1s ease;
 }
 
 .projects-page h1 {
