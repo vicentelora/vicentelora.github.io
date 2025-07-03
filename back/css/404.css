@@ -1,0 +1,27 @@
+.page-404 {
+    text-align: center;
+    padding: 2rem;
+    animation: fadeIn 1s ease;
+}
+.page-404 h1 {
+    font-size: 2.5rem;
+    margin-top: 4rem;
+    margin-bottom: 5rem;
+}
+.page-404 p {
+    font-size: 1.5rem;
+}
+.page-404 a {
+    color: #ffffff;
+    text-decoration: none;
+}
+.page-404 a:hover {
+    color: #00bfff;
+}
+.page-404 .easter-egg {
+    font-size: 1.2rem;
+    color: #000000;
+}
+.page-404 .easter-egg:hover {
+    color: #ffffff;
+}

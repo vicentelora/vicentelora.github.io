@@ -6,51 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — Page Not Found</title>
   <link rel="stylesheet" href="back/css/common.css">
+  <link rel="stylesheet" href="back/css/404.css">
   <link rel="icon" href="./back/favicon.ico?" type="image/x-icon" />
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      background-color: #000;
-      color: #fff;
-    }
-
-    h1 {
-      font-size: 5rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    a {
-      color: #fff;
-      text-decoration: underline;
-      font-weight: 600;
-    }
-  </style>
 </head>
 
-<header>
+<body>
+  <header>
+    <div><strong>Vicente Lora</strong></div>
     <nav>
       <a href="/">Home</a>
       <a href="/cv.html">CV</a>
       <a href="/projects.html">Projects</a>
-      <a href="/music.html">Music</a>
       <a href="/contact.html">Contact Me</a>
     </nav>
 </header>
 
-<body>
-  <h1>404</h1>
-  <p>This page doesn't exist. What you're looking for? 🧐</p>
-  <p><a href="/">Return to Home</a></p>
+  <main class="page-404">
+    <h1>404</h1>
+    <p>Page not found.<br>Were you hunting for an 🐇🧺🥚?</p>
+    <br>
+    <a href="" class="easter-egg">>Here's one<</p></a>
+    <br>
+    <p><a href="/" class="return">> Return to Home <</a></p>
+  </main>
+
+  <div class="wave-container">
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#444444" fill-opacity="1" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,138.7C672,139,768,181,864,202.7C960,224,1056,224,1152,202.7C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+    </svg>
+  </div>
+
+  <footer>
+    <p>© Vicente Lora 2025</p>
+  </footer>
+
 </body>
 
 </html>
