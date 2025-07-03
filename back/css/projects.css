@@ -1,24 +1,201 @@
+body {
+    min-height: 100vh;
+}
+
 .projects-page {
-    padding: 2rem;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding-bottom: 4rem;
 }
 
 .projects-page h1 {
+    font-size: 2.5rem;
+    margin-top: 3rem;
+    margin-bottom: 2.5rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-shadow: 0 2px 12px #000a;
+}
+
+.projects-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 4rem auto;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 24px 0 rgba(0,0,0,0.13);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.projects-section h2 {
+    color: #ffffff;
     font-size: 2rem;
-    margin-top: 4rem;
-    margin-bottom: 5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 12px #000a;
 }
 
-.projects-page p {
-    font-size: 1.4rem;
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+    justify-content: flex-start;
 }
 
-.projects-page a {
-    font-size: 1.4rem;
+.project-card {
+    background: rgba(30, 30, 30, 0.92);
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    max-width: 340px;
+    min-width: 220px;
+    width: 100%;
+    margin: 0;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+}
+
+.project-card h3 {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.project-card p {
+    color: #ffffff;
+    font-size: 1.08rem;
+    margin-bottom: 0.5rem;
+    flex: 1;
+}
+
+.project-card a {
+    color: #fff;
+    background: #000000;
+    padding: 0.4rem 1.1rem;
+    border-radius: 0.7rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.08rem;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px #0003;
+    display: inline-block;
+    margin-top: 0.2rem;
+    align-self: flex-end;
+}
+.project-card a:hover {
+    box-shadow: 0 4px 16px #31313133;
+    transform: scale(1.07);
+}
+
+#gom {
+    background: linear-gradient(120deg,
+        #8b1a1a 0%,
+        #925e0f 20%,
+        #86880a 40%,
+        #078411 60%,
+        #114e7d 80%,
+        #6506ad 100%);
     color: #ffffff;
 }
 
-a:hover {
-    transform: scale(1.05);
-    color: #09ff00;
+#til {
+    background: linear-gradient(120deg,
+        #23243a 0%,
+        #3a1859 20%,
+        #6a1a8d 40%,
+        #560e8d 60%,
+        #3a1859 80%,
+        #23243a 100%);
+    color: #ffffff;
+}
+
+#nucrate {
+    background: linear-gradient(120deg,
+        #c50c0c 0%,
+        #8a1717 20%,
+        #6d2020 40%,
+        #791515 60%,
+        #5e0b0b 80%,
+        #390000 100%);
+    color: #ffffff;
+}
+
+#omi {
+    background: linear-gradient(120deg,
+        #ffffff 0%,
+        #d0d0d0 20%,
+        #b2b2b2 40%,
+        #cdcdcd 60%,
+        #bcbcbc 80%,
+        #d3d3d3 100%);
+    color: #ffffff;
+}
+
+#omi h3,
+#omi p {
+    color: #000000;
+}
+
+#gdg-porto {
+    background: linear-gradient(120deg,
+        #022e95 0%,
+        #2a4d9e 20%,
+        #0e3ca6 40%,
+        #345bc0 60%,
+        #2152c2 80%,
+        #383a5d 100%);
+    color: #ffffff;
+}
+
+#gdg-uporto {
+    background: linear-gradient(120deg,
+        #027a95 0%,
+        #2a9e9e 20%,
+        #0e97a6 40%,
+        #297d97 60%,
+        #256b8c 80%,
+        #38505d 100%);
+    color: #ffffff;
+}
+
+.wave-container {
+    margin-top: 2rem;
+    animation: waveMove 12s linear infinite alternate;
+}
+
+@keyframes waveMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-40px); }
+}
+
+@media (max-width: 900px) {
+    .project-list {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: stretch;
+    }
+    .projects-section {
+        padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-card {
+        padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+        max-width: 98vw;
+        align-self: center;
+    }
+    .projects-section h2 {
+        align-self: center;
+    }
 }
