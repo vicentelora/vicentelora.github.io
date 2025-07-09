@@ -13,6 +13,7 @@ export class Tapping {
 
     getTaps(ws, playerID) {
         this.handleDown = (event) => {
+            if (event.target && event.target.id === 'refresh-btn') return; 
             if (window.isMuted) return;
             // Prevent double firing on touch devices
             if (event.type === 'mousedown' && this.touchActive) return;

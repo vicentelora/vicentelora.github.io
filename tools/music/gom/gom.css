@@ -1,0 +1,77 @@
+body {
+    min-height: 100vh;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', Arial, sans-serif;
+}
+.gom-card {
+    background: rgba(24,24,24,0.97);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
+    padding: 2.5rem 2rem 2.5rem 2rem;
+    max-width: 370px;
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    animation: fadeIn 1s;
+}
+.gom-card h1 {
+    font-size: 2.2rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 12px #000a;
+}
+.gom-card p {
+    color: #bbb;
+    font-size: 1.15rem;
+    margin-bottom: 1.2rem;
+    text-align: center;
+}
+.gom-actions {
+    display: flex;
+    gap: 1.2rem;
+    width: 100%;
+    justify-content: center;
+}
+.button-player, .button-composer {
+    font-family: inherit;
+    font-size: 1.15rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.8rem;
+    padding: 0.7rem 2.2rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    box-shadow: 0 2px 12px #0003;
+    margin: 0 0.2rem;
+}
+.button-player {
+    background: linear-gradient(120deg,#8b1a1a 0%,#848007 100%);
+    color: #fff;
+}
+.button-composer {
+    background: linear-gradient(120deg,#2a46c2 0%,#8E44AD 100%);
+    color: #fff;
+}
+.button-player:hover, .button-composer:hover {
+    transform: scale(1.07);
+    filter: brightness(1.15);
+}
+@media (max-width: 600px) {
+    .gom-card {
+    padding: 1.2rem 0.5rem;
+    }
+    .gom-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+    }
+    .button-player, .button-composer {
+    width: 100%;
+    padding: 0.8rem 0;
+    }
+}

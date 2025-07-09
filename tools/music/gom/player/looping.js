@@ -11,6 +11,7 @@ export class Looping {
 
     getTaps(ws, playerID) {
         this.handleClick = (event) => {
+            if (event.target && event.target.id === 'refresh-btn') return; 
             if (window.isMuted) return;
             
             if (event.type === 'mousedown' && this.touchActive) return;

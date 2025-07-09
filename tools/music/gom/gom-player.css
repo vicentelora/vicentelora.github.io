@@ -282,3 +282,25 @@ body, * {
     border-right: 30px solid transparent;
     border-bottom: 50px solid #29cc47;
 }
+
+#refresh-btn {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 9999;
+  background: rgba(30,30,30,0.92);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2.7rem;
+  height: 2.7rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #0005;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+#refresh-btn:hover {
+  background: #09ff00;
+  color: #222;
+  transform: scale(1.12) rotate(20deg);
+}
