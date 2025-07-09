@@ -150,6 +150,9 @@ function restorePlayerMode() {
     getPlayerMode(ws, playerID).then(mode => {
         playerMode = mode;
         clearModeInstances();
+
+        document.getElementById('player-header').style.display = 'flex';
+
         if (playerMode === 'tapping') {
             document.getElementById('tapping-screen').style.display = 'flex';
             currentModeInstance = new Tapping();
@@ -224,6 +227,8 @@ document.querySelectorAll('.menu button').forEach(button => {
 
         // Hide the menu and show the tap screen immediately
         document.getElementById('menu').style.display = 'none';
+
+        document.getElementById('player-header').style.display = 'flex';
 
         if (playerMode === 'tapping') {
             document.getElementById('tapping-screen').style.display = 'flex';
