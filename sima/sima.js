@@ -1,5 +1,5 @@
 let clickCount = 0;
-const REQUIRED_CLICKS = 42;
+const REQUIRED_CLICKS = 6767;
 
 // Get elements
 const egg = document.querySelector('.egg');
