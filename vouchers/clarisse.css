@@ -1,0 +1,257 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.container {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+.scratch-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #333333;
+}
+
+/* Hidden revealed content */
+.revealed-content {
+  background: #111111;
+  padding: 3rem 2rem;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #333333;
+}
+
+.revealed-content h2 {
+  font-size: 1rem;
+  color: #888888;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.revealed-content p {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+
+.emoji {
+  font-size: 2.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Reveal button */
+.reveal-button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin-top: 2rem;
+  transform: translateY(100px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.reveal-button.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.reveal-button:hover {
+  background-color: #888888;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.reveal-button:hover.visible {
+  transform: scale(1.05) translateY(0);
+}
+
+.reveal-button:active {
+  transform: scale(0.98);
+}
+
+.reveal-button:active.visible {
+  transform: scale(0.98) translateY(0);
+}
+
+/* Scratch card overlay */
+.scratch-canvas-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="%23999" stroke="%23333" stroke-width="2"/></svg>') 20 20, auto;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Scratch card instructions */
+.instructions {
+  color: #888888;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+
+.instructions p {
+  margin: 0.5rem 0;
+  font-weight: 400;
+}
+
+/* Animation for completion - subtle */
+@keyframes celebrate {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.revealed-content.celebrate {
+  animation: celebrate 0.4s ease-in-out;
+}
+
+/* Confetti styles - minimal */
+.confetti {
+  position: fixed;
+  pointer-events: none;
+  font-size: 1.2rem;
+  opacity: 0.7;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .revealed-content {
+    padding: 2.5rem 1.5rem;
+    min-height: 280px;
+  }
+
+  .revealed-content h2 {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .revealed-content p {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .emoji {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+
+  .reveal-button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .instructions {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .revealed-content {
+    padding: 3.5rem 2.5rem;
+    min-height: 320px;
+  }
+
+  .revealed-content h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .revealed-content p {
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .reveal-button {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+  }
+}

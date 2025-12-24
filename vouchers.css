@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.container {
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #888888;
+  font-size: 1rem;
+  margin-bottom: 3rem;
+  font-weight: 400;
+}
+
+.vouchers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.voucher-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #111111;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.voucher-card:hover {
+  border-color: #555555;
+  background-color: #1a1a1a;
+  transform: translateY(-4px);
+}
+
+.voucher-card:active {
+  transform: translateY(-2px);
+}
+
+.voucher-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.voucher-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.voucher-card p {
+  font-size: 0.9rem;
+  color: #888888;
+  font-weight: 400;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .vouchers-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .voucher-card {
+    padding: 1.5rem;
+  }
+
+  .voucher-icon {
+    font-size: 2.5rem;
+  }
+
+  .voucher-card h2 {
+    font-size: 1.3rem;
+  }
+
+  .voucher-card p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .vouchers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  .voucher-card {
+    padding: 2.5rem;
+  }
+
+  .voucher-icon {
+    font-size: 3.5rem;
+  }
+
+  .voucher-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .voucher-card p {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vouchers-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
